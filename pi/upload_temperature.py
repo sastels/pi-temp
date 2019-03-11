@@ -1,6 +1,5 @@
 import os
 import time
-import random
 from dotenv import load_dotenv
 from firebase_utils import setup_firebase, upload_to_firebase
 from sensor_utils import setup_sensor, read_temp
@@ -14,5 +13,5 @@ if __name__ == "__main__":
 
     while True:
         temperature = read_temp(device_file)
-        upload_to_firebase(db, pi_id, temperature)
+        upload_to_firebase(db=db, pi_id=pi_id, temperature=temperature)
         time.sleep(10)
