@@ -1,28 +1,17 @@
 import os
 import time
-import random
-from datetime import datetime
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
 from dotenv import load_dotenv
-load_dotenv()
+from firebase_utils import setup_firebase, upload_to_firebase
+from sensor_utils import setup_sensor, read_temp
 
-PI_ID = os.getenv("PI_ID")
+if __name__ == "__main__":
+    load_dotenv()
 
-# Use a service account
-cred = credentials.Certificate('./service_account.json')
-firebase_admin.initialize_app(cred)
-db = firestore.client()
+    pi_id = os.getenv("PI_ID")
+    db = setup_firebase('./service_account.json')
+    device_file = setup_sensor()
 
-while True:
-    now = datetime.now()
-    temperature = 20.0 + random.random()
-    print(f"{PI_ID} :: {now} :: temperature = {temperature}")
-    doc_ref = db.collection(u'temperatures').document(f"{PI_ID} :: {now}")
-    doc_ref.set({
-        'pi_id': PI_ID,
-        'datetime': now,
-        'temperature': temperature 
-    })
-    time.sleep(10)
+    while True:
+        temperature = read_temp(device_file)
+        upload_to_firebase(db=db, pi_id=pi_id, temperature=temperature)
+        time.sleep(10)
