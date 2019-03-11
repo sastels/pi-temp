@@ -1,0 +1,20 @@
+from datetime import datetime
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+def setup_firebase(service_account_path):
+    cred = credentials.Certificate(service_account_path)
+    firebase_admin.initialize_app(cred)
+    db = firestore.client()
+    return db
+
+def upload_to_firebase(db, pi_id, temperature):
+    now = datetime.now()
+    print(f"{pi_id} :: {now} :: temperature = {temperature}")
+    doc_ref = db.collection(u'temperatures').document(f"{pi_id} :: {now}")
+    doc_ref.set({
+        'pi_id': pi_id,
+        'datetime': now,
+        'temperature': temperature 
+    })
