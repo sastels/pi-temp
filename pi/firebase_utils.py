@@ -17,5 +17,6 @@ def upload_to_firebase(db, pi_id, temperature):
     doc_ref.set({
         'pi_id': pi_id,
         'datetime': now,
-        'temperature': temperature 
+        'temperature': temperature,
+        'humidity': humidity
     })
