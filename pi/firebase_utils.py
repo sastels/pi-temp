@@ -9,7 +9,7 @@ def setup_firebase(service_account_path):
     db = firestore.client()
     return db
 
-def upload_to_firebase(db, pi_id, temperature):
+def upload_to_firebase(db, pi_id, temperature, humidity):
     now = datetime.now()
     firebase_id = pi_id + " :: " + str(now)
     print(firebase_id + " :: temperature= "+ str(temperature))
