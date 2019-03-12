@@ -11,8 +11,9 @@ def setup_firebase(service_account_path):
 
 def upload_to_firebase(db, pi_id, temperature):
     now = datetime.now()
-    print(f"{pi_id} :: {now} :: temperature = {temperature}")
-    doc_ref = db.collection(u'temperatures').document(f"{pi_id} :: {now}")
+    firebase_id = pi_id + " :: " + str(now)
+    print(firebase_id + " :: temperature= "+ str(temperature))
+    doc_ref = db.collection('temperatures').document(firebase_id)
     doc_ref.set({
         'pi_id': pi_id,
         'datetime': now,

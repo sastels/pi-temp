@@ -12,6 +12,6 @@ if __name__ == "__main__":
     device_file = setup_sensor()
 
     while True:
-        temperature = read_temp(device_file)
+        temperature = 22 read_temp(device_file)
         upload_to_firebase(db=db, pi_id=pi_id, temperature=temperature)
         time.sleep(10)
