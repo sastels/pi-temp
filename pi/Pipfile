@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 firebase-admin = "*"
 python-dotenv = "*"
+adafruit-dht = {git = "https://github.com/adafruit/Adafruit_Python_DHT",editable = true}
 
 [requires]
-python_version = "3.6"
+python_version = "3.5"
