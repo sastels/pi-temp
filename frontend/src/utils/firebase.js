@@ -56,12 +56,15 @@ export const loadData = (collection, setState) => {
         return;
       }
       snapshot.forEach(doc => {
-        const datetime = moment(doc.data().datetime, "YYYY-MM-DD HH:mm:ss");
+        console.log({orig: doc.data().datetime})
+        const datetime = moment(doc.data().datetime.toDate());
+        console.log({datetime})
+
         const pi_id = doc.data().pi_id;
         const temperature = doc.data().temperature
-        const tod =
-        datetime.hour() + datetime.minutes() / 60.0 + datetime.seconds() / 3600.0;
-        data.push({ pi_id, datetime, temperature, tod });
+        const humidity = doc.data().humidity
+        const tod = datetime.hour() + datetime.minutes() / 60.0 + datetime.seconds() / 3600.0;
+        data.push({ pi_id, datetime, temperature, humidity, tod });
       });
 
       
