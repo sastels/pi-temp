@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { signIn, loadData } from "./utils/firebase";
+import Table from './Table';
+import Graph from './Graph';
 
 class App extends Component {
 
@@ -15,8 +17,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1> Temperatures</h1>
-
+        <h1>Temperature and Humidty</h1>
+        <Graph data={this.state.data}/>
+        <Table data={this.state.data}/>
       </div>
     );
   }
