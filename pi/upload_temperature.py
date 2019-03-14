@@ -11,9 +11,10 @@ if __name__ == "__main__":
     load_dotenv()
     pi_id = os.getenv("PI_ID")
     measurement_interval = os.getenv("INTERVAL", default=60*10)
-    db = setup_firebase('./service_account.json')
+    db = setup_firebase('/home/pi/Projects/pi-temp/pi/service_account.json')
 
     while True:
+        time.sleep(60)
         humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
         upload_to_firebase(db=db, pi_id=pi_id, temperature=temperature, humidity=humidity)
         time.sleep(measurement_interval)
