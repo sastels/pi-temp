@@ -1,0 +1,1 @@
+@reboot python3 /home/pi/Projects/pi-temp/pi/upload_temperature.py > /home/pi/Projects/pi-temp.logs 2>&1 &
