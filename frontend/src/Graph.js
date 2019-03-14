@@ -3,16 +3,16 @@ import Highcharts from "highcharts";
 import React from "react";
 import moment from "moment"
 
-const chartConfig = data => {
-  data.sort((a, b) => {
-    if (a[0] < b[0]) {
-      return -1;
-    } else if (a[0] > b[0]) {
-      return 1;
-    } else {
-      return 0;
-    }
-  });
+const chartConfig = (name, data) => {
+//   data.sort((a, b) => {
+//     if (a[0] < b[0]) {
+//       return -1;
+//     } else if (a[0] > b[0]) {
+//       return 1;
+//     } else {
+//       return 0;
+//     }
+//   });
 
   return {
 
@@ -20,14 +20,14 @@ const chartConfig = data => {
       enabled: false
     },
     title: {
-      text: "Temperatures"
+      text: name
     },
     xAxis: {
       type: "datetime",
     },
     yAxis: {
       title: {
-        text: "Temp"
+        text: name
       },
     },
     plotOptions: {
@@ -40,7 +40,7 @@ const chartConfig = data => {
     series: [
       {
         data: data,
-        name: "Temperature",
+        name: name,
         type: "spline",
         color: "blue",
       }
@@ -49,12 +49,20 @@ const chartConfig = data => {
 };
 
 const Graph = props => (
-  <HighchartsReact
-    highcharts={Highcharts}
-    options={
-      chartConfig(props.data.map(m => [m.datetime.valueOf(), m.temperature]))
-    }
-  />
+    <div>
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={
+        chartConfig('Temperature (C)', props.data.map(m => [m.datetime.valueOf(), m.temperature]))
+        }
+    />
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={
+        chartConfig('Humidity (%)', props.data.map(m => [m.datetime.valueOf(), m.humidity]))
+        }
+    />
+  </div>
 )
 
 export default Graph
