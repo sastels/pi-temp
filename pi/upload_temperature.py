@@ -15,6 +15,10 @@ if __name__ == "__main__":
 
     time.sleep(60)
     while True:
-        humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-        upload_to_firebase(db=db, pi_id=pi_id, temperature=temperature, humidity=humidity)
-        time.sleep(measurement_interval)
+        try:
+            humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+            upload_to_firebase(db=db, pi_id=pi_id, temperature=temperature, humidity=humidity)
+            time.sleep(measurement_interval)
+        except Exception as e:
+            print("Error: " + str(e), flush=True)
+            time.sleep(measurement_interval)
