@@ -3,34 +3,42 @@ import Highcharts from "highcharts";
 import React from "react";
 
 const chartConfig = (data) => {
-//   data.sort((a, b) => {
-//     if (a[0] < b[0]) {
-//       return -1;
-//     } else if (a[0] > b[0]) {
-//       return 1;
-//     } else {
-//       return 0;
-//     }
-//   });
-
   return {
-    colors: ['blue', 'red'],
+    colors: ['red', 'blue'],
     chart: {
       zoomType: "x",
       panKey: "meta",
       panning: true
     },
     legend: {
-      enabled: false
+      enabled: true
+    },
+    tooltip: {
+      crosshairs: [true, false],
+      shared: true
     },
     title: {
       text: "Temperature and Humidity"
     },
     xAxis: {
       type: "datetime",
-
     },
     yAxis: [{
+      gridLineWidth: 0,
+      labels: {
+        format: '{value}°C',
+        style: {
+          color: 'red'
+        }
+      },
+      title: {
+        text: "Temperature",
+        style: {
+          color: 'red'
+        }
+      },
+    },
+    { // secondary y axis
       opposite: true,
       labels: {
         format: '{value} %',
@@ -44,21 +52,6 @@ const chartConfig = (data) => {
           color: Highcharts.getOptions().colors[0]
         }
       },
-    },
-    { // secondary y axis
-      gridLineWidth: 0,
-      labels: {
-        format: '{value}°C',
-        style: {
-          color: Highcharts.getOptions().colors[1]
-        }
-      },
-      title: {
-        text: "Temperature",
-        style: {
-          color: Highcharts.getOptions().colors[1]
-        }
-      },
     }],
     plotOptions: {
       spline: {
@@ -69,7 +62,20 @@ const chartConfig = (data) => {
     },
     series: [
       {
+        name: 'Temperature',
+        type: 'spline',
+        data: data.map(d => [d.datetime.valueOf(), d.temperature]),
+        tooltip: {
+          valueDecimals: 1,
+          valueSuffix: '°C'
+        },
+        marker: {
+          enabled: false
+        },
+      },
+      {
         name: 'Humidity',
+        yAxis: 1,
         type: 'spline',
         data: data.map(d => [d.datetime.valueOf(), d.humidity]),
         marker: {
@@ -80,22 +86,7 @@ const chartConfig = (data) => {
           valueDecimals: 1,
           valueSuffix: ' %'
         }
-    
-      },
-      {
-        name: 'Temperature',
-        yAxis: 1,
-        type: 'spline',
-        data: data.map(d => [d.datetime.valueOf(), d.temperature]),
-        tooltip: {
-          valueDecimals: 1,
-          valueSuffix: '°C'
-        },
-        marker: {
-          enabled: false
-        },
-    
-      },
+      }
     ]
   };
 };
