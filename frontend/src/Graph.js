@@ -25,7 +25,7 @@ const chartConfig = (data) => {
       shared: true
     },
     title: {
-      text: "Temperature and Humidity"
+      text: "Conditions"
     },
     xAxis: {
       type: "datetime",
