@@ -13,8 +13,6 @@ const config = {
 };
 
 firebase.initializeApp(config)
-firebase.firestore().settings({ timestampsInSnapshots: true });
-
 firebase.firestore().enablePersistence()
   .catch(function(err) {
     if (err.code === 'failed-precondition') {

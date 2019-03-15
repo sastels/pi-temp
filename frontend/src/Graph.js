@@ -4,7 +4,7 @@ import React from "react";
 
 const chartConfig = (data) => {
   return {
-    colors: ['blue', 'red'],
+    colors: ['red', 'blue'],
     chart: {
       zoomType: "x",
       panKey: "meta",
@@ -24,21 +24,6 @@ const chartConfig = (data) => {
       type: "datetime",
     },
     yAxis: [{
-      opposite: true,
-      labels: {
-        format: '{value} %',
-        style: {
-          color: Highcharts.getOptions().colors[0]
-        }
-      },
-      title: {
-        text: "Humidity",
-        style: {
-          color: Highcharts.getOptions().colors[0]
-        }
-      },
-    },
-    { // secondary y axis
       gridLineWidth: 0,
       labels: {
         format: '{value}°C',
@@ -52,6 +37,21 @@ const chartConfig = (data) => {
           color: 'red'
         }
       },
+    },
+    { // secondary y axis
+      opposite: true,
+      labels: {
+        format: '{value} %',
+        style: {
+          color: Highcharts.getOptions().colors[0]
+        }
+      },
+      title: {
+        text: "Humidity",
+        style: {
+          color: Highcharts.getOptions().colors[0]
+        }
+      },
     }],
     plotOptions: {
       spline: {
@@ -62,7 +62,20 @@ const chartConfig = (data) => {
     },
     series: [
       {
+        name: 'Temperature',
+        type: 'spline',
+        data: data.map(d => [d.datetime.valueOf(), d.temperature]),
+        tooltip: {
+          valueDecimals: 1,
+          valueSuffix: '°C'
+        },
+        marker: {
+          enabled: false
+        },
+      },
+      {
         name: 'Humidity',
+        yAxis: 1,
         type: 'spline',
         data: data.map(d => [d.datetime.valueOf(), d.humidity]),
         marker: {
@@ -73,22 +86,7 @@ const chartConfig = (data) => {
           valueDecimals: 1,
           valueSuffix: ' %'
         }
-    
-      },
-      {
-        name: 'Temperature',
-        yAxis: 1,
-        type: 'spline',
-        data: data.map(d => [d.datetime.valueOf(), d.temperature]),
-        tooltip: {
-          valueDecimals: 1,
-          valueSuffix: '°C'
-        },
-        marker: {
-          enabled: false
-        },
-    
-      },
+      }
     ]
   };
 };
