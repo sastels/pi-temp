@@ -47,8 +47,7 @@ export const loadData = (id, setState) => {
   let data = [];
   var firebaseData = firebase.firestore().collection(id);
   firebaseData
-    .get()
-    .then(snapshot => {
+    .onSnapshot(snapshot => {
       if (snapshot.empty) {
         console.log("No matching documents.");
         return;
