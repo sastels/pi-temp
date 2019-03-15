@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
+import React from 'react';
 import { signIn, loadData } from "./utils/firebase";
 import Graph from './Graph';
-import Table from './Table';
+
+const root = css`
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 50px;
+`;
 
 const capitalize = s => {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : ""
 }
 
-class App extends Component {
+class App extends React.Component {
 
   state = {
     id: "",
@@ -21,18 +27,16 @@ class App extends Component {
   }
 
   render() {
-    let currentConditions = "(no data)"
+    let currentConditions = ""
     if (this.state.data.length > 0) {
       const m = this.state.data.slice(-1)[0]
-      currentConditions = `${m.datetime.fromNow()}: ${m.temperature.toFixed(1)}°C ${m.humidity.toFixed(1)} %`
+      currentConditions = `Last reading (${m.datetime.format("H:mm")}): ${m.temperature.toFixed(1)}°C ${m.humidity.toFixed(1)} %`
     }
     return (
-      <div>
+      <div css={root}>
         <h1>{capitalize(this.state.id)}</h1>
-        <h2> {currentConditions}</h2>
         <Graph data={this.state.data}/>
-        <Table data={this.state.data}/>
-
+        <p>{currentConditions}</p>
       </div>
     );
   }

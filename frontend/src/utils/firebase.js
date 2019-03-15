@@ -61,7 +61,4 @@ export const loadData = (id, setState) => {
       });
       setState({ id, data });
     })
-    .catch(err => {
-      console.log("Error getting documents", err);
-    });
 };
