@@ -1,4 +1,5 @@
 from datetime import datetime
+import pytz
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -10,7 +11,7 @@ def setup_firebase(service_account_path):
     return db
 
 def upload_to_firebase(db, pi_id, temperature, humidity):
-    now = datetime.now()
+    now = datetime.utcnow().replace(tzinfo=pytz.utc)
     firebase_id = str(now)
     print(firebase_id + " :: temperature= "+ str(temperature), flush=True)
     doc_ref = db.collection(pi_id).document(firebase_id)
