@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { signIn, loadData } from "./utils/firebase";
 import Graph from './Graph';
+import Table from './Table';
+
+const capitalize = s => {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : ""
+}
 
 class App extends Component {
 
@@ -11,7 +16,7 @@ class App extends Component {
 
   componentDidMount() {
     let id = window.location.pathname.split('/').slice(-1)[0]
-    id = id ? id.charAt(0).toUpperCase() + id.slice(1) : "Northside"
+    id = id ? id : "testing"
     signIn(() => loadData(id, this.setState.bind(this)));
   }
 
@@ -23,9 +28,11 @@ class App extends Component {
     }
     return (
       <div>
-        <h1>{this.state.id}</h1>
+        <h1>{capitalize(this.state.id)}</h1>
         <h2> {currentConditions}</h2>
         <Graph data={this.state.data}/>
+        <Table data={this.state.data}/>
+
       </div>
     );
   }

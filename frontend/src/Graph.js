@@ -2,13 +2,20 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import React from "react";
 
+Highcharts.setOptions({
+  time: {
+      useUTC: false
+  }
+});
+
 const chartConfig = (data) => {
   return {
     colors: ['red', 'blue'],
     chart: {
       zoomType: "x",
       panKey: "meta",
-      panning: true
+      panning: true,
+      
     },
     legend: {
       enabled: true

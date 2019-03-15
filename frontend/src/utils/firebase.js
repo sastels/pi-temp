@@ -57,7 +57,6 @@ export const loadData = (id, setState) => {
         const pi_id = doc.data().pi_id;
         const temperature = doc.data().temperature
         const humidity = doc.data().humidity
-        // const tod = datetime.hour() + datetime.minutes() / 60.0 + datetime.seconds() / 3600.0;
         data.push({ pi_id, datetime, temperature, humidity});
       });
       setState({ id, data });
