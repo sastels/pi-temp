@@ -3,16 +3,6 @@ import Highcharts from "highcharts";
 import React from "react";
 
 const chartConfig = (data) => {
-//   data.sort((a, b) => {
-//     if (a[0] < b[0]) {
-//       return -1;
-//     } else if (a[0] > b[0]) {
-//       return 1;
-//     } else {
-//       return 0;
-//     }
-//   });
-
   return {
     colors: ['blue', 'red'],
     chart: {
@@ -21,14 +11,17 @@ const chartConfig = (data) => {
       panning: true
     },
     legend: {
-      enabled: false
+      enabled: true
+    },
+    tooltip: {
+      crosshairs: [true, false],
+      shared: true
     },
     title: {
       text: "Temperature and Humidity"
     },
     xAxis: {
       type: "datetime",
-
     },
     yAxis: [{
       opposite: true,
@@ -50,13 +43,13 @@ const chartConfig = (data) => {
       labels: {
         format: '{value}°C',
         style: {
-          color: Highcharts.getOptions().colors[1]
+          color: 'red'
         }
       },
       title: {
         text: "Temperature",
         style: {
-          color: Highcharts.getOptions().colors[1]
+          color: 'red'
         }
       },
     }],

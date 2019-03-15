@@ -45,9 +45,9 @@ export const signIn = onSignIn => {
   });
 };
 
-export const loadData = (collection, setState) => {
+export const loadData = (id, setState) => {
   let data = [];
-  var firebaseData = firebase.firestore().collection(collection);
+  var firebaseData = firebase.firestore().collection(id);
   firebaseData
     .get()
     .then(snapshot => {
@@ -63,7 +63,7 @@ export const loadData = (collection, setState) => {
         // const tod = datetime.hour() + datetime.minutes() / 60.0 + datetime.seconds() / 3600.0;
         data.push({ pi_id, datetime, temperature, humidity});
       });
-      setState({ data });
+      setState({ id, data });
     })
     .catch(err => {
       console.log("Error getting documents", err);

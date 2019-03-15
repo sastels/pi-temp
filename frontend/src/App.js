@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import { signIn, loadData } from "./utils/firebase";
-import Table from './Table';
 import Graph from './Graph';
 
 class App extends Component {
 
   state = {
+    id: "",
     data: [],
   };
 
   componentDidMount() {
-    signIn(() => loadData("temperatures", this.setState.bind(this)));
+    let id = window.location.pathname.split('/').slice(-1)[0]
+    id = id ? id.charAt(0).toUpperCase() + id.slice(1) : "Northside"
+    signIn(() => loadData(id, this.setState.bind(this)));
   }
-
 
   render() {
     return (
       <div>
-        <h1>Environment</h1>
+        <h1>{this.state.id}</h1>
         <Graph data={this.state.data}/>
-        <Table data={this.state.data}/>
       </div>
     );
   }
