@@ -26,7 +26,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: cd frontend && npm i
+      - run: cd frontend && yarn
 
       - save_cache:
           paths:
@@ -34,7 +34,7 @@ jobs:
           key: v1-dependencies-{{ checksum "frontend/package.json" }}
 
       # run tests!
-      - run: cd frontend && npm run test
+      - run: cd frontend && yarn test
 
   deploy-job:
     docker:
@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Deploy Master to Firebase
           command: |
-            cd frontend && npm run build
+            cd frontend && yarn build
             ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 workflows:
   version: 2
