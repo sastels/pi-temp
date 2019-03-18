@@ -51,8 +51,8 @@ jobs:
       - run:
           name: Deploy Master to Firebase
           command: |
-            cd frontend && yarn build
-            ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+            cd ~/repo/frontend && yarn build
+            cd ~/repo && frontend/node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 workflows:
   version: 2
   -deploy:

@@ -29,6 +29,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "firebase-tools": "^6.5.0",
     "react-testing-library": "^6.0.0"
   }
 }
