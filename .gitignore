@@ -118,3 +118,4 @@ dmypy.json
 # SJA
 .vscode
 service_account.json
+.firebase
