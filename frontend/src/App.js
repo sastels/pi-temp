@@ -3,6 +3,7 @@ import { css, jsx } from '@emotion/core'
 import React from 'react';
 import { signIn, loadData } from "./utils/firebase";
 import Graph from './Graph';
+import GraphD3 from './graphD3'
 
 const root = css`
   font-family: Arial, Helvetica, sans-serif;
@@ -37,6 +38,8 @@ class App extends React.Component {
         <h1>{capitalize(this.state.id)}</h1>
         <Graph data={this.state.data}/>
         <p>{currentConditions}</p>
+        <GraphD3 data={[12, 5, 6, 6, 9, 10]} width={700} height={200} id="viz" />
+        <p>All Done!</p>
       </div>
     );
   }
