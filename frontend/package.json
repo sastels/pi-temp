@@ -5,7 +5,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.9",
     "firebase": "^5.8.6",
-    "highcharts": "^7.0.3",
+    "highcharts": "^9.0.0",
     "highcharts-react-official": "^2.1.1",
     "moment": "^2.24.0",
     "react": "^16.8.4",
