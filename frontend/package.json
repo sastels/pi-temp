@@ -7,7 +7,7 @@
     "firebase": "^5.8.6",
     "highcharts": "^7.0.3",
     "highcharts-react-official": "^2.1.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8"
